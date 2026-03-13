@@ -63,7 +63,7 @@ export function ActionButtons({
         disabled={capturing}
       >
         <Download className="size-4" />
-        {capturing ? "截圖中..." : "保存圖片"}
+        {capturing ? "截圖中..." : "加入主頁"}
       </button>
       <button
         type="button"
