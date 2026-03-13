@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { addMonths, parseISO, startOfDay } from "date-fns";
+import { parseISO, startOfDay } from "date-fns";
 import { ProgressRing } from "@/components/progress-ring";
 import { DischargeCountdown } from "@/components/discharge-countdown";
 import { DateRangeForm } from "@/components/date-range-form";
@@ -41,16 +41,6 @@ export function CountdownDisplay() {
     }
   }, [setStoredDates]);
 
-  useEffect(() => {
-    if (storedDates.enlistment || storedDates.discharge) return;
-    const saved = window.localStorage.getItem("berryout-dates");
-    if (saved) return;
-    const today = startOfDay(new Date());
-    setStoredDates({
-      enlistment: today.toISOString(),
-      discharge: addMonths(today, 4).toISOString(),
-    });
-  }, [storedDates, setStoredDates]);
 
   const enlistmentDate = storedDates.enlistment
     ? parseISO(storedDates.enlistment)

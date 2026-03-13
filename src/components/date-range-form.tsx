@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/popover";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Minus } from "lucide-react";
 
 interface DateRangeFormProps {
   enlistmentDate: Date | undefined;
@@ -31,7 +32,6 @@ function DatePicker({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="text-sm font-medium">{label}</label>
       <Popover>
         <PopoverTrigger
           className={cn(
@@ -57,7 +57,7 @@ function DatePicker({
             <rect width="18" height="18" x="3" y="4" rx="2" />
             <path d="M3 10h18" />
           </svg>
-          {date ? format(date, "yyyy/MM/dd") : "選擇日期"}
+          {date ? format(date, "yyyy/MM/dd") : label}
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
@@ -80,12 +80,13 @@ export function DateRangeForm({
   onDischargeChange,
 }: DateRangeFormProps) {
   return (
-    <div className="flex flex-row justify-center gap-6">
+    <div className="flex flex-row justify-center items-center gap-2">
       <DatePicker
         label="入伍日期"
         date={enlistmentDate}
         onSelect={onEnlistmentChange}
       />
+      <Minus />
       <DatePicker
         label="退伍日期"
         date={dischargeDate}
