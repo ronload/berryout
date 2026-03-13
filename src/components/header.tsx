@@ -1,6 +1,6 @@
 import { ThemeToggle } from "@/components/theme-toggle";
 
-import { Icon } from "lucide-react";
+import { Github, Icon } from "lucide-react";
 import { strawberry } from "@lucide/lab";
 
 export function Header() {
@@ -11,7 +11,17 @@ export function Header() {
           <Icon iconNode={strawberry} />
           BERRYOUT
         </span>
-        <ThemeToggle />
+        <div className="flex items-center gap-1">
+          <a
+            href="https://github.com/ronload/berryout"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            <Github className="size-5" />
+          </a>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
