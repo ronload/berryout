@@ -2,11 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { format } from "date-fns";
+
 import type { ElapsedTime } from "@/lib/date-utils";
 
 interface ProgressRingProps {
   percentage: number;
   elapsedTime: ElapsedTime | null;
+  dischargeDate?: Date;
   size?: number;
   strokeWidth?: number;
 }
@@ -40,6 +43,7 @@ function useAnimatedValue(target: number, duration = 1000) {
 export function ProgressRing({
   percentage,
   elapsedTime,
+  dischargeDate,
   size = 240,
   strokeWidth = 16,
 }: ProgressRingProps) {
@@ -84,7 +88,10 @@ export function ProgressRing({
           {animatedPercentage.toFixed(2)}%
         </span>
         <span className={`mt-1 text-sm tabular-nums text-muted-foreground${elapsedTime === null ? " invisible" : ""}`}>
-          已經入伍 <span className="font-bold text-foreground">{elapsedTime?.days ?? 0}</span> 天 <span className="font-bold text-foreground">{elapsedTime?.hours ?? 0}</span> 小時
+          已入伍 <span className="font-bold text-foreground">{elapsedTime?.days ?? 0}</span> 天 <span className="font-bold text-foreground">{elapsedTime?.hours ?? 0}</span> 小時
+        </span>
+        <span className={`mt-0.5 text-xs tabular-nums text-muted-foreground${dischargeDate ? "" : " invisible"}`}>
+          退伍 {dischargeDate ? format(dischargeDate, "yyyy/MM/dd") : ""}
         </span>
       </div>
     </div>

@@ -36,7 +36,7 @@ function DatePicker({
         <PopoverTrigger
           className={cn(
             buttonVariants({ variant: "outline" }),
-            " justify-start text-left tabular-nums",
+            "w-[160px] justify-start text-left tabular-nums",
             !date && "text-muted-foreground",
           )}
         >

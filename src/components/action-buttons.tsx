@@ -52,12 +52,12 @@ export function ActionButtons({
   }, [enlistmentDate, dischargeDate]);
 
   return (
-    <div ref={buttonsRef} className="flex flex-row justify-center gap-4">
+    <div ref={buttonsRef} className="flex w-full flex-row justify-center gap-4">
       <button
         type="button"
         className={cn(
           buttonVariants({ variant: "outline" }),
-          "gap-2 cursor-pointer",
+          "rounded-full flex-1 gap-2 cursor-pointer h-12",
         )}
         onClick={handleSaveImage}
         disabled={capturing}
@@ -68,8 +68,8 @@ export function ActionButtons({
       <button
         type="button"
         className={cn(
-          buttonVariants({ variant: "outline" }),
-          "gap-2 cursor-pointer",
+          buttonVariants({ variant: "default" }),
+          "flex-1 gap-2 cursor-pointer rounded-full h-12",
         )}
         onClick={handleShare}
         disabled={!enlistmentDate || !dischargeDate}

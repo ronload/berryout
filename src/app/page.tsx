@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex flex-1 items-center justify-center px-4 py-8 w-full">
+      <main className="flex flex-1 justify-center px-4 py-8 pb-[max(2rem,env(safe-area-inset-bottom))] w-full">
         <CountdownDisplay />
       </main>
     </div>
