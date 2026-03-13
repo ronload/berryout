@@ -37,7 +37,7 @@ export default function Home() {
         )}
       />
       <Header />
-      <main className="flex flex-1 justify-center px-4 py-8 pb-[max(2rem,env(safe-area-inset-bottom))] w-full">
+      <main className="flex flex-1 justify-center px-6 py-8 pb-[max(2rem,env(safe-area-inset-bottom))] w-full">
         <CountdownDisplay />
       </main>
     </div>

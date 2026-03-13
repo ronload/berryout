@@ -80,7 +80,7 @@ export function DateRangeForm({
   onDischargeChange,
 }: DateRangeFormProps) {
   return (
-    <div className="flex flex-row justify-center items-center gap-2">
+    <div className="flex flex-row justify-center items-center gap-2 max-w-full">
       <DatePicker
         label="入伍日期"
         date={enlistmentDate}
