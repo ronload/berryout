@@ -53,30 +53,41 @@ export function ProgressRing({
   const animatedPercentage = useAnimatedValue(percentage, 1200);
   const offset = circumference - (animatedPercentage / 100) * circumference;
 
+  const endAngle = (animatedPercentage / 100) * 2 * Math.PI;
+  const endX = size / 2 + radius * Math.cos(endAngle);
+  const endY = size / 2 + radius * Math.sin(endAngle);
+
   return (
     <div className="relative inline-flex items-center justify-center">
       <svg width={size} height={size} className="-rotate-90" aria-hidden="true">
+        <defs>
+          <linearGradient id="ring-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" className="[stop-color:theme(colors.foreground)]" />
+            <stop offset="100%" className="[stop-color:color-mix(in_oklch,theme(colors.foreground)_50%,theme(colors.muted-foreground)_50%)]" />
+          </linearGradient>
+        </defs>
         <circle
           cx={size / 2}
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="currentColor"
+          className="stroke-foreground/[0.06]"
           strokeWidth={strokeWidth}
-          className="text-muted"
         />
         <circle
           cx={size / 2}
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="currentColor"
+          stroke="url(#ring-gradient)"
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
-          className="text-primary"
         />
+        {animatedPercentage > 0 && (
+          <circle cx={endX} cy={endY} r={strokeWidth * 0.7} className="fill-[color-mix(in_oklch,var(--foreground)_75%,var(--muted-foreground)_25%)]" />
+        )}
       </svg>
       <div className="absolute flex flex-col items-center justify-center">
         <span className="text-4xl font-bold tabular-nums">
