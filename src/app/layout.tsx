@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "https://berryout.vercel.app",
+  ),
   title: "BerryOut - 退伍倒數計時器",
   description: "追蹤你的退伍倒數進度",
   icons: {
