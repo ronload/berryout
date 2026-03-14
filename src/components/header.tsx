@@ -21,7 +21,7 @@ function GithubIcon({ size = 24, color }: { size?: number; color?: string }) {
 
 export function Header() {
   return (
-    <header className="fixed top-0 z-50 w-full bg-transparent">
+    <header className="fixed top-[env(safe-area-inset-top)] z-50 w-full bg-transparent">
       <div className="mx-auto flex h-14 max-w-screen-xl items-center justify-between px-4">
         <span className="text-lg font-semibold flex gap-2">
           <Icon iconNode={strawberry} />

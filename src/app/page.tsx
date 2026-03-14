@@ -45,7 +45,7 @@ export async function generateMetadata({
 
 export default function Home() {
   return (
-    <div className="flex h-[calc(100*var(--vh-unit))] flex-col overflow-hidden">
+    <div className="flex h-[calc(100*var(--vh-unit))] flex-col overflow-hidden pt-[env(safe-area-inset-top)]">
       <ParticlesBackground />
       <Header />
       <main className="flex flex-1 items-center justify-center px-6 pt-14 pb-[max(2rem,env(safe-area-inset-bottom))] w-full">
