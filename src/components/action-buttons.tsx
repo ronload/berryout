@@ -53,18 +53,18 @@ export function ActionButtons({
 
   return (
     <div ref={buttonsRef} className="flex w-full flex-row justify-center gap-4">
-      <button
-        type="button"
-        className={cn(
-          buttonVariants({ variant: "outline" }),
-          "rounded-full flex-1 gap-2 cursor-pointer h-12",
-        )}
-        onClick={handleSaveImage}
-        disabled={capturing}
-      >
-        <Download className="size-4" />
-        {capturing ? "截圖中..." : "加入主頁"}
-      </button>
+      {/* <button */}
+      {/*   type="button" */}
+      {/*   className={cn( */}
+      {/*     buttonVariants({ variant: "outline" }), */}
+      {/*     "rounded-full flex-1 gap-2 cursor-pointer h-12", */}
+      {/*   )} */}
+      {/*   onClick={handleSaveImage} */}
+      {/*   disabled={capturing} */}
+      {/* > */}
+      {/*   <Download className="size-4" /> */}
+      {/*   {capturing ? "截圖中..." : "加入主頁"} */}
+      {/* </button> */}
       <button
         type="button"
         className={cn(
@@ -75,7 +75,7 @@ export function ActionButtons({
         disabled={!enlistmentDate || !dischargeDate}
       >
         <Share2 className="size-4" />
-        {copied ? "已複製" : "分享連結"}
+        {copied ? "已複製" : "分享倒數"}
       </button>
     </div>
   );
