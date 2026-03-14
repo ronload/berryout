@@ -1,7 +1,23 @@
 import { ThemeToggle } from "@/components/theme-toggle";
-
+import { siGithub } from "simple-icons";
 import { Github, Icon } from "lucide-react";
 import { strawberry } from "@lucide/lab";
+
+function GithubIcon({ size = 24, color }: { size?: number; color?: string }) {
+  return (
+    <svg
+      role="img"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill={color || "currentColor"}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <title>{siGithub.title}</title>
+      <path d={siGithub.path} />
+    </svg>
+  );
+}
 
 export function Header() {
   return (
@@ -18,7 +34,8 @@ export function Header() {
             rel="noopener noreferrer"
             className="inline-flex size-9 items-center justify-center rounded-md transition-colors hover:bg-accent hover:text-accent-foreground"
           >
-            <Github className="size-5" />
+            {/* <Github className="size-5" /> */}
+            <GithubIcon />
           </a>
           <ThemeToggle />
         </div>
