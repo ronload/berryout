@@ -1,5 +1,8 @@
 # BerryOut
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://berryout.vercel.app)
+
 A countdown timer that visualizes the remaining time until your target date with a progress ring.
 
 ## Features
@@ -30,7 +33,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 
 Deploy to Vercel with one click:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/user/berryout)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ronload/berryout)
 
 ## License
 
