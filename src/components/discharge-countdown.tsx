@@ -8,7 +8,7 @@ interface DischargeCountdownProps {
 
 function calcCountdown(discharge: Date) {
   const now = new Date();
-  let diff = discharge.getTime() - now.getTime();
+  const diff = discharge.getTime() - now.getTime();
   if (diff <= 0) return { totalDays: 0, hours: 0, minutes: 0, seconds: 0 };
 
   const totalSeconds = Math.floor(diff / 1000);
@@ -21,21 +21,26 @@ function calcCountdown(discharge: Date) {
 }
 
 export function DischargeCountdown({ dischargeDate }: DischargeCountdownProps) {
-  const [countdown, setCountdown] = useState<ReturnType<typeof calcCountdown> | null>(null);
+  const [countdown, setCountdown] = useState<ReturnType<
+    typeof calcCountdown
+  > | null>(() => (dischargeDate ? calcCountdown(dischargeDate) : null));
 
   useEffect(() => {
     if (!dischargeDate) return;
 
-    setCountdown(calcCountdown(dischargeDate));
     const timer = setInterval(() => {
       setCountdown(calcCountdown(dischargeDate));
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+    };
   }, [dischargeDate]);
 
   return (
-    <div className={`flex flex-col items-center${countdown === null ? " invisible" : ""}`}>
+    <div
+      className={`flex flex-col items-center${countdown === null ? " invisible" : ""}`}
+    >
       <span className="text-5xl font-bold tabular-nums text-foreground">
         {countdown?.totalDays ?? 0}
       </span>

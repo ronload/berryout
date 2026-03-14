@@ -43,5 +43,7 @@ for (const { name, size } of sizes) {
     .png()
     .toFile(resolve(root, "public", name));
 
-  console.log(`Generated ${name} (${size}x${size}, icon ${iconSize}x${iconSize})`);
+  console.log(
+    `Generated ${name} (${size}x${size}, icon ${iconSize}x${iconSize})`,
+  );
 }

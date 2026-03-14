@@ -1,9 +1,6 @@
 import { differenceInHours } from "date-fns";
 
-export function calculateProgress(
-  enlistment: Date,
-  discharge: Date,
-): number {
+export function calculateProgress(enlistment: Date, discharge: Date): number {
   const now = new Date();
   const totalHours = differenceInHours(discharge, enlistment);
   if (totalHours <= 0) return 0;

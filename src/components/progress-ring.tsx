@@ -2,14 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { format } from "date-fns";
-
 import type { ElapsedTime } from "@/lib/date-utils";
 
 interface ProgressRingProps {
   percentage: number;
   elapsedTime: ElapsedTime | null;
-  dischargeDate?: Date;
   size?: number;
   strokeWidth?: number;
 }
@@ -34,7 +31,9 @@ function useAnimatedValue(target: number, duration = 1000) {
     }
 
     rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+    };
   }, [target, duration]);
 
   return current;
@@ -43,7 +42,6 @@ function useAnimatedValue(target: number, duration = 1000) {
 export function ProgressRing({
   percentage,
   elapsedTime,
-  dischargeDate,
   size = 240,
   strokeWidth = 16,
 }: ProgressRingProps) {
@@ -62,8 +60,14 @@ export function ProgressRing({
       <svg width={size} height={size} className="-rotate-90" aria-hidden="true">
         <defs>
           <linearGradient id="ring-gradient" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" className="[stop-color:theme(colors.foreground)]" />
-            <stop offset="100%" className="[stop-color:color-mix(in_oklch,theme(colors.foreground)_50%,theme(colors.muted-foreground)_50%)]" />
+            <stop
+              offset="0%"
+              className="[stop-color:theme(colors.foreground)]"
+            />
+            <stop
+              offset="100%"
+              className="[stop-color:color-mix(in_oklch,theme(colors.foreground)_50%,theme(colors.muted-foreground)_50%)]"
+            />
           </linearGradient>
         </defs>
         <circle
@@ -86,7 +90,12 @@ export function ProgressRing({
           strokeDashoffset={offset}
         />
         {animatedPercentage > 0 && (
-          <circle cx={endX} cy={endY} r={strokeWidth * 0.7} className="fill-[color-mix(in_oklch,var(--foreground)_75%,var(--muted-foreground)_25%)]" />
+          <circle
+            cx={endX}
+            cy={endY}
+            r={strokeWidth * 0.7}
+            className="fill-[color-mix(in_oklch,var(--foreground)_75%,var(--muted-foreground)_25%)]"
+          />
         )}
       </svg>
       <div className="absolute flex flex-col items-center justify-center">

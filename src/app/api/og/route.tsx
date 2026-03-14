@@ -7,10 +7,10 @@ function formatDate(date: Date): string {
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, "0");
   const d = String(date.getDate()).padStart(2, "0");
-  return `${y}/${m}/${d}`;
+  return `${String(y)}/${m}/${d}`;
 }
 
-export async function GET(request: Request) {
+export function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const e = searchParams.get("e");
   const d = searchParams.get("d");
@@ -72,15 +72,15 @@ export async function GET(request: Request) {
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
-          width: `${size}px`,
-          height: `${size}px`,
+          width: `${String(size)}px`,
+          height: `${String(size)}px`,
           flexShrink: 0,
         }}
       >
         <svg
           width={size}
           height={size}
-          viewBox={`0 0 ${size} ${size}`}
+          viewBox={`0 0 ${String(size)} ${String(size)}`}
           style={{
             transform: "rotate(-90deg)",
             position: "absolute",
@@ -110,16 +110,11 @@ export async function GET(request: Request) {
             stroke="url(#stroke-grad)"
             strokeWidth={strokeWidth}
             strokeLinecap="round"
-            strokeDasharray={`${circumference}`}
-            strokeDashoffset={`${offset}`}
+            strokeDasharray={String(circumference)}
+            strokeDashoffset={String(offset)}
           />
           {percentage > 0 && (
-            <circle
-              cx={endX}
-              cy={endY}
-              r={strokeWidth * 0.7}
-              fill="#d0d0d0"
-            />
+            <circle cx={endX} cy={endY} r={strokeWidth * 0.7} fill="#d0d0d0" />
           )}
         </svg>
 
@@ -163,7 +158,7 @@ export async function GET(request: Request) {
           flexDirection: "column",
           justifyContent: "space-between",
           marginLeft: "64px",
-          height: `${size}px`,
+          height: `${String(size)}px`,
         }}
       >
         {/* Date Range */}

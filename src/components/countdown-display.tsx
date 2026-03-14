@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo } from "react";
 import { parseISO, startOfDay } from "date-fns";
 import { ProgressRing } from "@/components/progress-ring";
 import { DischargeCountdown } from "@/components/discharge-countdown";
@@ -17,7 +17,6 @@ interface StoredDates {
 const EMPTY_DATES: StoredDates = { enlistment: null, discharge: null };
 
 export function CountdownDisplay() {
-  const captureRef = useRef<HTMLDivElement>(null);
   const [storedDates, setStoredDates] = useLocalStorage<StoredDates>(
     "berryout-dates",
     EMPTY_DATES,
@@ -73,10 +72,7 @@ export function CountdownDisplay() {
   };
 
   return (
-    <div
-      ref={captureRef}
-      className="flex flex-col items-center justify-center gap-[min(4.5rem,calc(6*var(--vh-unit)))] w-full max-w-sm"
-    >
+    <div className="flex flex-col items-center justify-center gap-[min(4.5rem,calc(6*var(--vh-unit)))] w-full max-w-sm">
       <DateRangeForm
         enlistmentDate={enlistmentDate}
         dischargeDate={dischargeDate}
@@ -86,12 +82,10 @@ export function CountdownDisplay() {
       <ProgressRing
         percentage={percentage}
         elapsedTime={elapsedTime}
-        dischargeDate={dischargeDate}
         size={288}
       />
       <DischargeCountdown dischargeDate={dischargeDate} />
       <ActionButtons
-        captureRef={captureRef}
         enlistmentDate={enlistmentDate}
         dischargeDate={dischargeDate}
       />

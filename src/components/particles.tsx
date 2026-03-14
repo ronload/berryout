@@ -178,9 +178,9 @@ export function Particles({
         [Math.random(), Math.random(), Math.random(), Math.random()],
         i * 4,
       );
-      const col = hexToRgb(
-        palette[Math.floor(Math.random() * palette.length)],
-      );
+      const hex =
+        palette[Math.floor(Math.random() * palette.length)] ?? "#ffffff";
+      const col = hexToRgb(hex);
       colors.set(col, i * 3);
     }
 
@@ -220,6 +220,7 @@ export function Particles({
       lastTime = t;
       elapsed += delta * speed;
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- ogl types `uniforms` as `any`
       program.uniforms.uTime.value = elapsed * 0.001;
 
       if (moveParticlesOnHover) {

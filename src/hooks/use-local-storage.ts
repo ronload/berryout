@@ -1,38 +1,51 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useRef, useSyncExternalStore } from "react";
 
 export function useLocalStorage<T>(
   key: string,
   initialValue: T,
 ): [T, (value: T | ((prev: T) => T)) => void] {
-  const [storedValue, setStoredValue] = useState<T>(initialValue);
+  const cacheRef = useRef<{ raw: string | null; value: T } | null>(null);
 
-  useEffect(() => {
-    try {
-      const item = window.localStorage.getItem(key);
-      if (item) {
-        setStoredValue(JSON.parse(item));
-      }
-    } catch (error) {
-      console.error(`Error reading localStorage key "${key}":`, error);
-    }
-  }, [key]);
-
-  const setValue = useCallback(
-    (value: T | ((prev: T) => T)) => {
-      setStoredValue((prev) => {
-        const next = value instanceof Function ? value(prev) : value;
-        try {
-          window.localStorage.setItem(key, JSON.stringify(next));
-        } catch (error) {
-          console.error(`Error setting localStorage key "${key}":`, error);
-        }
-        return next;
-      });
+  const subscribe = useCallback(
+    (onChange: () => void) => {
+      const handler = (e: StorageEvent) => {
+        if (e.key === key) onChange();
+      };
+      window.addEventListener("storage", handler);
+      return () => {
+        window.removeEventListener("storage", handler);
+      };
     },
     [key],
   );
 
-  return [storedValue, setValue];
+  const getSnapshot = useCallback((): T => {
+    const raw = window.localStorage.getItem(key);
+    if (cacheRef.current?.raw === raw) {
+      return cacheRef.current.value;
+    }
+    const value = raw !== null ? (JSON.parse(raw) as T) : initialValue;
+    cacheRef.current = { raw, value };
+    return value;
+  }, [key, initialValue]);
+
+  const getServerSnapshot = useCallback((): T => initialValue, [initialValue]);
+
+  const value = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+
+  const setValue = useCallback(
+    (next: T | ((prev: T) => T)) => {
+      const prev = getSnapshot();
+      const resolved = next instanceof Function ? next(prev) : next;
+      const raw = JSON.stringify(resolved);
+      window.localStorage.setItem(key, raw);
+      cacheRef.current = { raw, value: resolved };
+      window.dispatchEvent(new StorageEvent("storage", { key }));
+    },
+    [key, getSnapshot],
+  );
+
+  return [value, setValue];
 }
