@@ -55,12 +55,7 @@ export function ProgressRing({
 
   return (
     <div className="relative inline-flex items-center justify-center">
-      <svg
-        width={size}
-        height={size}
-        className="-rotate-90"
-        aria-hidden="true"
-      >
+      <svg width={size} height={size} className="-rotate-90" aria-hidden="true">
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -87,11 +82,18 @@ export function ProgressRing({
         <span className="text-4xl font-bold tabular-nums">
           {animatedPercentage.toFixed(2)}%
         </span>
-        <span className={`mt-1 text-sm tabular-nums text-muted-foreground${elapsedTime === null ? " invisible" : ""}`}>
-          已入伍 <span className="font-bold text-foreground">{elapsedTime?.days ?? 0}</span> 天 <span className="font-bold text-foreground">{elapsedTime?.hours ?? 0}</span> 小時
-        </span>
-        <span className={`mt-0.5 text-xs tabular-nums text-muted-foreground${dischargeDate ? "" : " invisible"}`}>
-          退伍 {dischargeDate ? format(dischargeDate, "yyyy/MM/dd") : ""}
+        <span
+          className={`mt-1 text-sm tabular-nums text-muted-foreground${elapsedTime === null ? " invisible" : ""}`}
+        >
+          已入伍{" "}
+          <span className="font-bold text-foreground">
+            {elapsedTime?.days ?? 0}
+          </span>{" "}
+          天{" "}
+          <span className="font-bold text-foreground">
+            {elapsedTime?.hours ?? 0}
+          </span>{" "}
+          小時
         </span>
       </div>
     </div>
