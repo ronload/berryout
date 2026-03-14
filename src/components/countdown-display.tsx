@@ -73,8 +73,11 @@ export function CountdownDisplay() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-8 w-full max-w-sm">
-      <div ref={captureRef} className="flex flex-col items-center gap-8 w-full">
+    <div className="flex flex-col justify-center items-center gap-12 w-full max-w-sm">
+      <div
+        ref={captureRef}
+        className="flex flex-col items-center gap-12 w-full"
+      >
         <DateRangeForm
           enlistmentDate={enlistmentDate}
           dischargeDate={dischargeDate}

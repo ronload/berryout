@@ -16,7 +16,7 @@ export function Header() {
             href="https://github.com/ronload/berryout"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="inline-flex size-9 items-center justify-center rounded-md transition-colors hover:bg-accent hover:text-accent-foreground"
           >
             <Github className="size-5" />
           </a>
