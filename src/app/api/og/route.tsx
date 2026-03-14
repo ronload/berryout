@@ -40,8 +40,8 @@ export async function GET(request: Request) {
   const enlistmentStr = `${enlistment.getFullYear()}/${String(enlistment.getMonth() + 1).padStart(2, "0")}/${String(enlistment.getDate()).padStart(2, "0")}`;
   const dischargeStr = `${discharge.getFullYear()}/${String(discharge.getMonth() + 1).padStart(2, "0")}/${String(discharge.getDate()).padStart(2, "0")}`;
 
-  const size = 240;
-  const strokeWidth = 16;
+  const size = 360;
+  const strokeWidth = 24;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (percentage / 100) * circumference;
@@ -57,7 +57,7 @@ export async function GET(request: Request) {
         background: COLORS.background,
         fontFamily: "sans-serif",
         color: COLORS.foreground,
-        padding: "60px",
+        padding: "40px 60px",
       }}
     >
       <div
@@ -121,7 +121,7 @@ export async function GET(request: Request) {
           >
             <span
               style={{
-                fontSize: "36px",
+                fontSize: "52px",
                 fontWeight: 700,
                 color: COLORS.foreground,
               }}
@@ -130,18 +130,18 @@ export async function GET(request: Request) {
             </span>
             <span
               style={{
-                fontSize: "14px",
+                fontSize: "20px",
                 color: COLORS.mutedForeground,
-                marginTop: "4px",
+                marginTop: "6px",
               }}
             >
               已入伍 {elapsedDays} 天
             </span>
             <span
               style={{
-                fontSize: "12px",
+                fontSize: "16px",
                 color: COLORS.mutedForeground,
-                marginTop: "2px",
+                marginTop: "4px",
               }}
             >
               退伍 {dischargeStr}
@@ -160,7 +160,7 @@ export async function GET(request: Request) {
         >
           <span
             style={{
-              fontSize: "20px",
+              fontSize: "28px",
               color: COLORS.mutedForeground,
             }}
           >
@@ -177,7 +177,7 @@ export async function GET(request: Request) {
           >
             <span
               style={{
-                fontSize: "80px",
+                fontSize: "120px",
                 fontWeight: 700,
                 color: COLORS.foreground,
                 lineHeight: 1,
@@ -187,7 +187,7 @@ export async function GET(request: Request) {
             </span>
             <span
               style={{
-                fontSize: "24px",
+                fontSize: "32px",
                 color: COLORS.mutedForeground,
               }}
             >
@@ -204,8 +204,8 @@ export async function GET(request: Request) {
             }}
           >
             <svg
-              width="24"
-              height="24"
+              width="32"
+              height="32"
               viewBox="0 0 24 24"
               fill="none"
               stroke={COLORS.mutedForeground}
@@ -227,7 +227,7 @@ export async function GET(request: Request) {
             </svg>
             <span
               style={{
-                fontSize: "24px",
+                fontSize: "30px",
                 fontWeight: 600,
                 color: COLORS.mutedForeground,
                 letterSpacing: "2px",
