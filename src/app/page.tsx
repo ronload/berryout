@@ -12,7 +12,10 @@ export async function generateMetadata({
   const e = params.e;
   const d = params.d;
 
-  const ogUrl = new URL("/api/og", process.env.NEXT_PUBLIC_BASE_URL || "https://berryout.vercel.app");
+  const ogUrl = new URL(
+    "/api/og",
+    process.env.NEXT_PUBLIC_BASE_URL || "https://berryout.vercel.app",
+  );
   if (e) ogUrl.searchParams.set("e", e);
   if (d) ogUrl.searchParams.set("d", d);
 
@@ -45,7 +48,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <ParticlesBackground />
       <Header />
-      <main className="flex flex-1 justify-center px-6 py-8 pb-[max(2rem,env(safe-area-inset-bottom))] w-full">
+      <main className="flex flex-1 justify-center px-6 pb-[max(2rem,env(safe-area-inset-bottom))] w-full">
         <CountdownDisplay />
       </main>
     </div>
