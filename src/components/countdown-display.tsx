@@ -73,26 +73,23 @@ export function CountdownDisplay() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-12 w-full max-w-sm">
-      <div
-        ref={captureRef}
-        className="flex flex-col items-center gap-12 w-full"
-      >
-        <DateRangeForm
-          enlistmentDate={enlistmentDate}
-          dischargeDate={dischargeDate}
-          onEnlistmentChange={handleEnlistmentChange}
-          onDischargeChange={handleDischargeChange}
-        />
-        <ProgressRing
-          percentage={percentage}
-          elapsedTime={elapsedTime}
-          dischargeDate={dischargeDate}
-          size={288}
-        />
-        <DischargeCountdown dischargeDate={dischargeDate} />
-      </div>
-
+    <div
+      ref={captureRef}
+      className="max-h-[100svh] flex flex-col items-center justify-start gap-[min(4.5rem,6svh)] w-full max-w-sm"
+    >
+      <DateRangeForm
+        enlistmentDate={enlistmentDate}
+        dischargeDate={dischargeDate}
+        onEnlistmentChange={handleEnlistmentChange}
+        onDischargeChange={handleDischargeChange}
+      />
+      <ProgressRing
+        percentage={percentage}
+        elapsedTime={elapsedTime}
+        dischargeDate={dischargeDate}
+        size={288}
+      />
+      <DischargeCountdown dischargeDate={dischargeDate} />
       <ActionButtons
         captureRef={captureRef}
         enlistmentDate={enlistmentDate}
