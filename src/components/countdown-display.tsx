@@ -75,7 +75,7 @@ export function CountdownDisplay() {
   return (
     <div
       ref={captureRef}
-      className="max-h-[calc(100*var(--vh-unit))] flex flex-col items-center justify-center gap-[min(4.5rem,calc(6*var(--vh-unit)))] w-full max-w-sm"
+      className="flex flex-col items-center justify-center gap-[min(4.5rem,calc(6*var(--vh-unit)))] w-full max-w-sm"
     >
       <DateRangeForm
         enlistmentDate={enlistmentDate}

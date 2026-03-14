@@ -45,10 +45,10 @@ export async function generateMetadata({
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex h-[calc(100*var(--vh-unit))] flex-col overflow-hidden">
       <ParticlesBackground />
       <Header />
-      <main className="flex flex-1 justify-center px-6 pb-[max(2rem,env(safe-area-inset-bottom))] w-full">
+      <main className="flex flex-1 items-center justify-center px-6 pt-14 pb-[max(2rem,env(safe-area-inset-bottom))] w-full">
         <CountdownDisplay />
       </main>
     </div>
