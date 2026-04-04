@@ -6,6 +6,7 @@ import { ProgressRing } from "@/components/progress-ring";
 import { DischargeCountdown } from "@/components/discharge-countdown";
 import { DateRangeForm } from "@/components/date-range-form";
 import { ActionButtons } from "@/components/action-buttons";
+import { DischargeCounter } from "@/components/discharge-counter";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { calculateProgress, getElapsedTime } from "@/lib/date-utils";
 
@@ -89,6 +90,7 @@ export function CountdownDisplay() {
         enlistmentDate={enlistmentDate}
         dischargeDate={dischargeDate}
       />
+      <DischargeCounter discharged={percentage >= 100} />
     </div>
   );
 }
