@@ -57,8 +57,8 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0(@types/node@25.6.0)(typescript@6.0.3)
       simple-icons:
-        specifier: ^16.11.0
-        version: 16.11.0
+        specifier: ^16.18.0
+        version: 16.18.0
       tailwind-merge:
         specifier: ^3.5.0
         version: 3.5.0
@@ -2757,8 +2757,8 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  simple-icons@16.11.0:
-    resolution: {integrity: sha512-6vqbcdaT6PsgUXud9rrP9w+nrmRzzStMEvyDavMeGwDgZSYM4uJ3tH7zurgTLHJO0RnMqU3Q09Vgo7WdTXV1eA==}
+  simple-icons@16.18.0:
+    resolution: {integrity: sha512-5KbjcP456Gm1lrk+rhDuX4zFri+3lRX39IjzXAvoMAO8Ne76WlVlM+Z3kA6jdZ7+QHadgXsf++R7g2jaYVbYig==}
     engines: {node: '>=0.12.18'}
 
   sisteransi@1.0.5:
@@ -5951,7 +5951,7 @@ snapshots:
 
   signal-exit@4.1.0: {}
 
-  simple-icons@16.11.0: {}
+  simple-icons@16.18.0: {}
 
   sisteransi@1.0.5: {}
 
