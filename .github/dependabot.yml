@@ -6,3 +6,8 @@ updates:
       interval: "weekly"
     registries: "*"
     versioning-strategy: "increase"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
