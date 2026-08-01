@@ -27,8 +27,8 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0
       html2canvas-pro:
-        specifier: ^2.3.1
-        version: 2.3.1
+        specifier: ^2.3.2
+        version: 2.3.2
       lucide:
         specifier: ^1.27.0
         version: 1.27.0
@@ -1978,8 +1978,8 @@ packages:
     resolution: {integrity: sha512-emn+JoJjrN9YTpRDS5it/UI2SO9BAE37T6I3d963RxcZ81G9A4pr2SZTEiiaiKbzx+NKRg5BZ89fCL7gCJCUog==}
     engines: {node: '>=16.9.0'}
 
-  html2canvas-pro@2.3.1:
-    resolution: {integrity: sha512-w7CCWi0B0kCy/joy5cPN2GIDGW0iwbqBppxxc2Vc5UyqYDQ1K13ZVr+MyGR/34Mq03emCTxVbBTpG299/prACw==}
+  html2canvas-pro@2.3.2:
+    resolution: {integrity: sha512-lYFaxtQM8exYVAtXmjdx8cjkw+/2GycRvSTcr2M2MuxXKuYlWe77+KFKuY92y/tzkvzA8XZTQIDlqoVZDB+mqQ==}
     engines: {node: '>=16.0.0'}
 
   http-errors@2.0.1:
@@ -5170,7 +5170,7 @@ snapshots:
 
   hono@4.12.30: {}
 
-  html2canvas-pro@2.3.1:
+  html2canvas-pro@2.3.2:
     dependencies:
       css-line-break: 2.1.0
       text-segmentation: 1.0.3
