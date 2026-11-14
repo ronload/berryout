@@ -9,24 +9,28 @@ interface DischargeCountdownProps {
 function calcCountdown(discharge: Date) {
   const now = new Date();
   const diff = discharge.getTime() - now.getTime();
-  if (diff <= 0) return { totalDays: 0, hours: 0, minutes: 0, seconds: 0 };
+  if (diff <= 0) {
+    return { totalDays: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
 
   const totalSeconds = Math.floor(diff / 1000);
   const seconds = totalSeconds % 60;
   const minutes = Math.floor(totalSeconds / 60) % 60;
   const hours = Math.floor(totalSeconds / 3600) % 24;
-  const totalDays = Math.floor(totalSeconds / 86400);
+  const totalDays = Math.floor(totalSeconds / 86_400);
 
   return { totalDays, hours, minutes, seconds };
 }
 
 export function DischargeCountdown({ dischargeDate }: DischargeCountdownProps) {
-  const [countdown, setCountdown] = useState<ReturnType<
-    typeof calcCountdown
-  > | null>(() => (dischargeDate ? calcCountdown(dischargeDate) : null));
+  const [countdown, setCountdown] = useState<ReturnType<typeof calcCountdown> | null>(() =>
+    dischargeDate ? calcCountdown(dischargeDate) : null,
+  );
 
   useEffect(() => {
-    if (!dischargeDate) return;
+    if (!dischargeDate) {
+      return;
+    }
 
     const timer = setInterval(() => {
       setCountdown(calcCountdown(dischargeDate));
@@ -38,9 +42,7 @@ export function DischargeCountdown({ dischargeDate }: DischargeCountdownProps) {
   }, [dischargeDate]);
 
   return (
-    <div
-      className={`flex flex-col items-center${countdown === null ? " invisible" : ""}`}
-    >
+    <div className={`flex flex-col items-center${countdown === null ? " invisible" : ""}`}>
       <span className="text-5xl font-bold tabular-nums text-foreground">
         {countdown?.totalDays ?? 0}
       </span>

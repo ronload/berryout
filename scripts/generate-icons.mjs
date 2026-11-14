@@ -1,7 +1,7 @@
+import { readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { readFileSync } from "fs";
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..");
@@ -26,10 +26,7 @@ for (const { name, size } of sizes) {
       .replace('stroke="currentColor"', 'stroke="#ffffff"'),
   );
 
-  const iconBuffer = await sharp(resizedSvg)
-    .resize(iconSize, iconSize)
-    .png()
-    .toBuffer();
+  const iconBuffer = await sharp(resizedSvg).resize(iconSize, iconSize).png().toBuffer();
 
   await sharp({
     create: {
@@ -43,7 +40,5 @@ for (const { name, size } of sizes) {
     .png()
     .toFile(resolve(root, "public", name));
 
-  console.log(
-    `Generated ${name} (${size}x${size}, icon ${iconSize}x${iconSize})`,
-  );
+  console.log(`Generated ${name} (${size}x${size}, icon ${iconSize}x${iconSize})`);
 }

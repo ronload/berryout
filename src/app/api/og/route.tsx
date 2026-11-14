@@ -1,5 +1,5 @@
-import { ImageResponse } from "next/og";
 import { differenceInHours } from "date-fns";
+import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
@@ -19,7 +19,7 @@ export function GET(request: Request) {
   const enlistment = e ? new Date(e) : new Date("2024-03-14");
   const discharge = d ? new Date(d) : new Date("2025-03-14");
 
-  if (isNaN(enlistment.getTime()) || isNaN(discharge.getTime())) {
+  if (Number.isNaN(enlistment.getTime()) || Number.isNaN(discharge.getTime())) {
     return new Response("Invalid date parameters", { status: 400 });
   }
 
@@ -27,16 +27,14 @@ export function GET(request: Request) {
   const totalHours = differenceInHours(discharge, enlistment);
   const elapsedHours = differenceInHours(now, enlistment);
   const percentage =
-    totalHours <= 0
-      ? 0
-      : Math.min(100, Math.max(0, (elapsedHours / totalHours) * 100));
+    totalHours <= 0 ? 0 : Math.min(100, Math.max(0, (elapsedHours / totalHours) * 100));
 
   const elapsedDays = Math.max(0, Math.floor(elapsedHours / 24));
   const elapsedRemainingHours = Math.max(0, elapsedHours % 24);
 
   // Countdown calculation
   const diffMs = Math.max(0, discharge.getTime() - now.getTime());
-  const remainingDays = Math.floor(diffMs / 86400000);
+  const remainingDays = Math.floor(diffMs / 86_400_000);
 
   // Progress ring geometry
   const size = 420;
@@ -57,8 +55,7 @@ export function GET(request: Request) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background:
-          "radial-gradient(circle at 50% 45%, #1a1a1a 0%, #0a0a0a 70%)",
+        background: "radial-gradient(circle at 50% 45%, #1a1a1a 0%, #0a0a0a 70%)",
         fontFamily: "monospace, sans-serif",
         color: "#fafafa",
         position: "relative",
@@ -113,9 +110,7 @@ export function GET(request: Request) {
             strokeDasharray={String(circumference)}
             strokeDashoffset={String(offset)}
           />
-          {percentage > 0 && (
-            <circle cx={endX} cy={endY} r={strokeWidth * 0.7} fill="#d0d0d0" />
-          )}
+          {percentage > 0 && <circle cx={endX} cy={endY} r={strokeWidth * 0.7} fill="#d0d0d0" />}
         </svg>
 
         {/* Ring inner text */}

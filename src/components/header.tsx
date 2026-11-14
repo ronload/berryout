@@ -1,7 +1,7 @@
-import { ThemeToggle } from "@/components/theme-toggle";
-import { siGithub } from "simple-icons";
-import { Icon } from "lucide-react";
 import { strawberry } from "@lucide/lab";
+import { Icon } from "lucide-react";
+import { siGithub } from "simple-icons";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 function GithubIcon({ size = 24, color }: { size?: number; color?: string }) {
   return (

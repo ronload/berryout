@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Header } from "@/components/header";
 import { CountdownDisplay } from "@/components/countdown-display";
+import { Header } from "@/components/header";
 import { ParticlesBackground } from "@/components/particles-background";
 
 export async function generateMetadata({
@@ -16,8 +16,12 @@ export async function generateMetadata({
     "/api/og",
     process.env.NEXT_PUBLIC_BASE_URL || "https://berryout.vercel.app",
   );
-  if (e) ogUrl.searchParams.set("e", e);
-  if (d) ogUrl.searchParams.set("d", d);
+  if (e) {
+    ogUrl.searchParams.set("e", e);
+  }
+  if (d) {
+    ogUrl.searchParams.set("d", d);
+  }
 
   const ogImageUrl = ogUrl.toString();
 

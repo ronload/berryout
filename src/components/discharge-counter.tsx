@@ -24,11 +24,17 @@ export function DischargeCounter({ discharged }: DischargeCounterProps) {
   }, []);
 
   useEffect(() => {
-    if (!discharged) return;
-    if (incrementedRef.current) return;
+    if (!discharged) {
+      return;
+    }
+    if (incrementedRef.current) {
+      return;
+    }
 
     try {
-      if (window.localStorage.getItem(STORAGE_KEY)) return;
+      if (window.localStorage.getItem(STORAGE_KEY)) {
+        return;
+      }
     } catch {
       return;
     }
@@ -46,7 +52,9 @@ export function DischargeCounter({ discharged }: DischargeCounterProps) {
       .catch(() => {});
   }, [discharged]);
 
-  if (count === null) return null;
+  if (count === null) {
+    return null;
+  }
 
   return (
     <p className="text-sm text-muted-foreground">

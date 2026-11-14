@@ -1,7 +1,7 @@
 "use client";
 
+import { Camera, Geometry, Mesh, Program, Renderer } from "ogl";
 import { useEffect, useRef } from "react";
-import { Renderer, Camera, Geometry, Program, Mesh } from "ogl";
 
 const defaultColors = ["#ffffff", "#ffffff", "#ffffff"];
 
@@ -13,7 +13,7 @@ const hexToRgb = (hex: string): [number, number, number] => {
       .map((c) => c + c)
       .join("");
   }
-  const int = parseInt(hex, 16);
+  const int = Number.parseInt(hex, 16);
   const r = ((int >> 16) & 255) / 255;
   const g = ((int >> 8) & 255) / 255;
   const b = (int & 255) / 255;
@@ -121,7 +121,9 @@ export function Particles({
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container) {
+      return;
+    }
 
     const renderer = new Renderer({
       dpr: pixelRatio,
@@ -159,13 +161,13 @@ export function Particles({
     const positions = new Float32Array(count * 3);
     const randoms = new Float32Array(count * 4);
     const colors = new Float32Array(count * 3);
-    const palette =
-      particleColors && particleColors.length > 0
-        ? particleColors
-        : defaultColors;
+    const palette = particleColors && particleColors.length > 0 ? particleColors : defaultColors;
 
     for (let i = 0; i < count; i++) {
-      let x: number, y: number, z: number, len: number;
+      let x: number;
+      let y: number;
+      let z: number;
+      let len: number;
       do {
         x = Math.random() * 2 - 1;
         y = Math.random() * 2 - 1;
@@ -174,12 +176,8 @@ export function Particles({
       } while (len > 1 || len === 0);
       const r = Math.cbrt(Math.random());
       positions.set([x * r, y * r, z * r], i * 3);
-      randoms.set(
-        [Math.random(), Math.random(), Math.random(), Math.random()],
-        i * 4,
-      );
-      const hex =
-        palette[Math.floor(Math.random() * palette.length)] ?? "#ffffff";
+      randoms.set([Math.random(), Math.random(), Math.random(), Math.random()], i * 4);
+      const hex = palette[Math.floor(Math.random() * palette.length)] ?? "#ffffff";
       const col = hexToRgb(hex);
       colors.set(col, i * 3);
     }

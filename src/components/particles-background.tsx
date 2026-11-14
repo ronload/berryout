@@ -10,13 +10,11 @@ const getServerSnapshot = () => false;
 
 export function ParticlesBackground() {
   const { resolvedTheme } = useTheme();
-  const mounted = useSyncExternalStore(
-    emptySubscribe,
-    getSnapshot,
-    getServerSnapshot,
-  );
+  const mounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return null;
+  }
 
   const colors =
     resolvedTheme === "dark"

@@ -1,8 +1,8 @@
 "use client";
 
-import { useCallback, useState } from "react";
 import { format } from "date-fns";
 import { Share2 } from "lucide-react";
+import { useCallback, useState } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -11,14 +11,13 @@ interface ActionButtonsProps {
   dischargeDate: Date | undefined;
 }
 
-export function ActionButtons({
-  enlistmentDate,
-  dischargeDate,
-}: ActionButtonsProps) {
+export function ActionButtons({ enlistmentDate, dischargeDate }: ActionButtonsProps) {
   const [copied, setCopied] = useState(false);
 
   const handleShare = useCallback(async () => {
-    if (!enlistmentDate || !dischargeDate) return;
+    if (!(enlistmentDate && dischargeDate)) {
+      return;
+    }
     const url = new URL(window.location.href);
     url.search = "";
     url.searchParams.set("e", format(enlistmentDate, "yyyy-MM-dd"));
@@ -41,7 +40,7 @@ export function ActionButtons({
         onClick={() => {
           void handleShare();
         }}
-        disabled={!enlistmentDate || !dischargeDate}
+        disabled={!(enlistmentDate && dischargeDate)}
       >
         <Share2 className="size-4" />
         {copied ? "已複製" : "分享倒數"}

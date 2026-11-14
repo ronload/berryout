@@ -25,9 +25,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "https://berryout.vercel.app",
-  ),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://berryout.vercel.app"),
   title: "BerryOut - 退伍倒數計時器",
   description: "追蹤你的退伍倒數進度",
   icons: {
@@ -48,9 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-TW" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
