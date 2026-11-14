@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import type { ElapsedTime } from "@/lib/date-utils";
+import { messages } from "@/lib/messages";
 
 interface ProgressRingProps {
   percentage: number;
@@ -96,12 +97,17 @@ export function ProgressRing({
         )}
       </svg>
       <div className="absolute flex flex-col items-center justify-center">
-        <span className="text-4xl font-bold tabular-nums">{animatedPercentage.toFixed(2)}%</span>
+        <span className="text-4xl font-bold tabular-nums">
+          {messages.progress.percentage(animatedPercentage)}
+        </span>
         <span
           className={`mt-1 text-sm tabular-nums text-muted-foreground${elapsedTime === null ? " invisible" : ""}`}
         >
-          已入伍 <span className="font-bold text-foreground">{elapsedTime?.days ?? 0}</span> 天{" "}
-          <span className="font-bold text-foreground">{elapsedTime?.hours ?? 0}</span> 小時
+          {messages.progress.enlisted}{" "}
+          <span className="font-bold text-foreground">{elapsedTime?.days ?? 0}</span>{" "}
+          {messages.progress.days}{" "}
+          <span className="font-bold text-foreground">{elapsedTime?.hours ?? 0}</span>{" "}
+          {messages.progress.hours}
         </span>
       </div>
     </div>

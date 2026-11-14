@@ -2,6 +2,7 @@ import { strawberry } from "@lucide/lab";
 import { Icon } from "lucide-react";
 import { siGithub } from "simple-icons";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { messages } from "@/lib/messages";
 
 function GithubIcon({ size = 24, color }: { size?: number; color?: string }) {
   return (
@@ -10,7 +11,7 @@ function GithubIcon({ size = 24, color }: { size?: number; color?: string }) {
       viewBox="0 0 24 24"
       width={size}
       height={size}
-      fill={color || "currentColor"}
+      fill={color ?? "currentColor"}
       xmlns="http://www.w3.org/2000/svg"
     >
       <title>{siGithub.title}</title>
@@ -25,7 +26,7 @@ export function Header() {
       <div className="mx-auto flex h-14 max-w-screen-xl items-center justify-between px-4">
         <span className="text-lg font-semibold flex gap-2">
           <Icon iconNode={strawberry} />
-          BERRYOUT
+          {messages.brand}
         </span>
         <div className="flex items-center gap-1">
           <a

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { baseUrl } from "@/lib/env";
 import { ThemeProvider } from "@/providers/theme-provider";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
@@ -25,7 +26,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://berryout.vercel.app"),
+  metadataBase: new URL(baseUrl),
   title: "BerryOut - 退伍倒數計時器",
   description: "追蹤你的退伍倒數進度",
   icons: {

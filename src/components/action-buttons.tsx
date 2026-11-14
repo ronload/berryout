@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { Share2 } from "lucide-react";
 import { useCallback, useState } from "react";
 import { buttonVariants } from "@/components/ui/button";
+import { messages } from "@/lib/messages";
 import { cn } from "@/lib/utils";
 
 interface ActionButtonsProps {
@@ -43,7 +44,7 @@ export function ActionButtons({ enlistmentDate, dischargeDate }: ActionButtonsPr
         disabled={!(enlistmentDate && dischargeDate)}
       >
         <Share2 className="size-4" />
-        {copied ? "已複製" : "分享倒數"}
+        {copied ? messages.share.copied : messages.share.idle}
       </button>
     </div>
   );

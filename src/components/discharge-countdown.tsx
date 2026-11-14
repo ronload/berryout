@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { messages } from "@/lib/messages";
 
 interface DischargeCountdownProps {
   dischargeDate: Date | undefined;
@@ -47,12 +48,12 @@ export function DischargeCountdown({ dischargeDate }: DischargeCountdownProps) {
         {countdown?.totalDays ?? 0}
       </span>
       <span className="mt-1 text-sm font-medium tracking-widest text-muted-foreground">
-        天後退伍
+        {messages.countdown.daysUntilDischarge}
       </span>
       <span className="mt-2 text-sm tabular-nums text-muted-foreground">
-        {String(countdown?.hours ?? 0).padStart(2, "0")} 時{" "}
-        {String(countdown?.minutes ?? 0).padStart(2, "0")} 分{" "}
-        {String(countdown?.seconds ?? 0).padStart(2, "0")} 秒
+        {String(countdown?.hours ?? 0).padStart(2, "0")} {messages.countdown.hours}{" "}
+        {String(countdown?.minutes ?? 0).padStart(2, "0")} {messages.countdown.minutes}{" "}
+        {String(countdown?.seconds ?? 0).padStart(2, "0")} {messages.countdown.seconds}
       </span>
     </div>
   );
