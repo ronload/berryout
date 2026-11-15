@@ -2,15 +2,12 @@
 
 import { format } from "date-fns";
 import { zhTW } from "date-fns/locale";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Minus } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { messages } from "@/lib/messages";
+import { cn } from "@/lib/utils";
 
 interface DateRangeFormProps {
   enlistmentDate: Date | undefined;
@@ -51,6 +48,7 @@ function DatePicker({
             strokeLinecap="round"
             strokeLinejoin="round"
             className="mr-2"
+            aria-hidden="true"
           >
             <path d="M8 2v4" />
             <path d="M16 2v4" />
@@ -82,18 +80,16 @@ export function DateRangeForm({
   return (
     <div className="flex flex-row justify-center items-center gap-2 max-w-full">
       <DatePicker
-        label="入伍日期"
+        label={messages.dateRange.enlistment}
         date={enlistmentDate}
         onSelect={onEnlistmentChange}
       />
       <Minus />
       <DatePicker
-        label="退伍日期"
+        label={messages.dateRange.discharge}
         date={dischargeDate}
         onSelect={onDischargeChange}
-        disabledMatcher={
-          enlistmentDate ? (date: Date) => date <= enlistmentDate : undefined
-        }
+        disabledMatcher={enlistmentDate ? (date: Date) => date <= enlistmentDate : undefined}
       />
     </div>
   );

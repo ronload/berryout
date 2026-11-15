@@ -10,7 +10,9 @@ function getConfig(): CloudflareConfig | null {
   const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
   const namespaceId = process.env.CLOUDFLARE_KV_NAMESPACE_ID;
   const apiToken = process.env.CLOUDFLARE_KV_API_TOKEN;
-  if (!accountId || !namespaceId || !apiToken) return null;
+  if (!(accountId && namespaceId && apiToken)) {
+    return null;
+  }
   return { accountId, namespaceId, apiToken };
 }
 
@@ -23,15 +25,14 @@ async function getCount(config: CloudflareConfig): Promise<number> {
     headers: { Authorization: `Bearer ${config.apiToken}` },
     next: { revalidate: 0 },
   });
-  if (!res.ok) return 0;
+  if (!res.ok) {
+    return 0;
+  }
   const text = await res.text();
-  return parseInt(text, 10) || 0;
+  return Number.parseInt(text, 10) || 0;
 }
 
-async function setCount(
-  config: CloudflareConfig,
-  value: number,
-): Promise<void> {
+async function setCount(config: CloudflareConfig, value: number): Promise<void> {
   await fetch(kvUrl(config), {
     method: "PUT",
     headers: { Authorization: `Bearer ${config.apiToken}` },
@@ -51,10 +52,7 @@ export async function GET() {
 export async function POST() {
   const config = getConfig();
   if (!config) {
-    return Response.json(
-      { error: "Counter service not configured" },
-      { status: 503 },
-    );
+    return Response.json({ error: "Counter service not configured" }, { status: 503 });
   }
   const current = await getCount(config);
   const next = current + 1;

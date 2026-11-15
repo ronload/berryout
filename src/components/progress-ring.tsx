@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import type { ElapsedTime } from "@/lib/date-utils";
+import { messages } from "@/lib/messages";
 
 interface ProgressRingProps {
   percentage: number;
@@ -22,7 +23,7 @@ function useAnimatedValue(target: number, duration = 1000) {
     function animate(now: number) {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const eased = 1 - (1 - progress) ** 3;
       setCurrent(start + (target - start) * eased);
 
       if (progress < 1) {
@@ -60,10 +61,7 @@ export function ProgressRing({
       <svg width={size} height={size} className="-rotate-90" aria-hidden="true">
         <defs>
           <linearGradient id="ring-gradient" x1="0" y1="0" x2="1" y2="1">
-            <stop
-              offset="0%"
-              className="[stop-color:theme(colors.foreground)]"
-            />
+            <stop offset="0%" className="[stop-color:theme(colors.foreground)]" />
             <stop
               offset="100%"
               className="[stop-color:color-mix(in_oklch,theme(colors.foreground)_50%,theme(colors.muted-foreground)_50%)]"
@@ -100,20 +98,16 @@ export function ProgressRing({
       </svg>
       <div className="absolute flex flex-col items-center justify-center">
         <span className="text-4xl font-bold tabular-nums">
-          {animatedPercentage.toFixed(2)}%
+          {messages.progress.percentage(animatedPercentage)}
         </span>
         <span
           className={`mt-1 text-sm tabular-nums text-muted-foreground${elapsedTime === null ? " invisible" : ""}`}
         >
-          已入伍{" "}
-          <span className="font-bold text-foreground">
-            {elapsedTime?.days ?? 0}
-          </span>{" "}
-          天{" "}
-          <span className="font-bold text-foreground">
-            {elapsedTime?.hours ?? 0}
-          </span>{" "}
-          小時
+          {messages.progress.enlisted}{" "}
+          <span className="font-bold text-foreground">{elapsedTime?.days ?? 0}</span>{" "}
+          {messages.progress.days}{" "}
+          <span className="font-bold text-foreground">{elapsedTime?.hours ?? 0}</span>{" "}
+          {messages.progress.hours}
         </span>
       </div>
     </div>

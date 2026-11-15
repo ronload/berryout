@@ -11,7 +11,9 @@ export function useLocalStorage<T>(
   const subscribe = useCallback(
     (onChange: () => void) => {
       const handler = (e: StorageEvent) => {
-        if (e.key === key) onChange();
+        if (e.key === key) {
+          onChange();
+        }
       };
       window.addEventListener("storage", handler);
       return () => {
@@ -26,7 +28,7 @@ export function useLocalStorage<T>(
     if (cacheRef.current?.raw === raw) {
       return cacheRef.current.value;
     }
-    const value = raw !== null ? (JSON.parse(raw) as T) : initialValue;
+    const value = raw === null ? initialValue : (JSON.parse(raw) as T);
     cacheRef.current = { raw, value };
     return value;
   }, [key, initialValue]);

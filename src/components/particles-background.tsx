@@ -8,20 +8,18 @@ const emptySubscribe = () => () => {};
 const getSnapshot = () => true;
 const getServerSnapshot = () => false;
 
+const darkColors = ["#ffffff", "#ffffff", "#ffffff"];
+const lightColors = ["#000000", "#000000", "#333333"];
+
 export function ParticlesBackground() {
   const { resolvedTheme } = useTheme();
-  const mounted = useSyncExternalStore(
-    emptySubscribe,
-    getSnapshot,
-    getServerSnapshot,
-  );
+  const mounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return null;
+  }
 
-  const colors =
-    resolvedTheme === "dark"
-      ? ["#ffffff", "#ffffff", "#ffffff"]
-      : ["#000000", "#000000", "#333333"];
+  const colors = resolvedTheme === "dark" ? darkColors : lightColors;
 
   return (
     <Particles

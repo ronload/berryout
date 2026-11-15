@@ -1,13 +1,15 @@
+import { readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { readFileSync } from "fs";
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..");
 const svgBuffer = readFileSync(resolve(root, "public/icon.svg"));
 
 const padding = 0.2; // 20% padding on each side, icon occupies 60%
+const widthAttribute = /width="24"/;
+const heightAttribute = /height="24"/;
 
 const sizes = [
   { name: "apple-touch-icon.png", size: 180 },
@@ -15,21 +17,18 @@ const sizes = [
   { name: "icon-512.png", size: 512 },
 ];
 
-for (const { name, size } of sizes) {
+async function generateIcon({ name, size }) {
   const iconSize = Math.round(size * (1 - padding * 2));
 
   const resizedSvg = Buffer.from(
     svgBuffer
       .toString("utf-8")
-      .replace(/width="24"/, `width="${iconSize}"`)
-      .replace(/height="24"/, `height="${iconSize}"`)
+      .replace(widthAttribute, `width="${iconSize}"`)
+      .replace(heightAttribute, `height="${iconSize}"`)
       .replace('stroke="currentColor"', 'stroke="#ffffff"'),
   );
 
-  const iconBuffer = await sharp(resizedSvg)
-    .resize(iconSize, iconSize)
-    .png()
-    .toBuffer();
+  const iconBuffer = await sharp(resizedSvg).resize(iconSize, iconSize).png().toBuffer();
 
   await sharp({
     create: {
@@ -43,7 +42,8 @@ for (const { name, size } of sizes) {
     .png()
     .toFile(resolve(root, "public", name));
 
-  console.log(
-    `Generated ${name} (${size}x${size}, icon ${iconSize}x${iconSize})`,
-  );
+  // biome-ignore lint/suspicious/noConsole: this CLI script reports each generated file on the terminal
+  console.log(`Generated ${name} (${size}x${size}, icon ${iconSize}x${iconSize})`);
 }
+
+await Promise.all(sizes.map(generateIcon));

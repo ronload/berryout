@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { messages } from "@/lib/messages";
 
 const STORAGE_KEY = "berryout-discharged";
 
@@ -24,11 +25,17 @@ export function DischargeCounter({ discharged }: DischargeCounterProps) {
   }, []);
 
   useEffect(() => {
-    if (!discharged) return;
-    if (incrementedRef.current) return;
+    if (!discharged) {
+      return;
+    }
+    if (incrementedRef.current) {
+      return;
+    }
 
     try {
-      if (window.localStorage.getItem(STORAGE_KEY)) return;
+      if (window.localStorage.getItem(STORAGE_KEY)) {
+        return;
+      }
     } catch {
       return;
     }
@@ -46,11 +53,14 @@ export function DischargeCounter({ discharged }: DischargeCounterProps) {
       .catch(() => {});
   }, [discharged]);
 
-  if (count === null) return null;
+  if (count === null) {
+    return null;
+  }
 
   return (
     <p className="text-sm text-muted-foreground">
-      已陪伴 <span className="font-bold tabular-nums">{count}</span> 人退伍
+      {messages.counter.accompanied} <span className="font-bold tabular-nums">{count}</span>{" "}
+      {messages.counter.discharged}
     </p>
   );
 }

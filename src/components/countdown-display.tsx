@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
 import { parseISO, startOfDay } from "date-fns";
-import { ProgressRing } from "@/components/progress-ring";
-import { DischargeCountdown } from "@/components/discharge-countdown";
-import { DateRangeForm } from "@/components/date-range-form";
+import { useEffect, useMemo } from "react";
 import { ActionButtons } from "@/components/action-buttons";
+import { DateRangeForm } from "@/components/date-range-form";
+import { DischargeCountdown } from "@/components/discharge-countdown";
 import { DischargeCounter } from "@/components/discharge-counter";
+import { ProgressRing } from "@/components/progress-ring";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { calculateProgress, getElapsedTime } from "@/lib/date-utils";
 
@@ -18,10 +18,7 @@ interface StoredDates {
 const EMPTY_DATES: StoredDates = { enlistment: null, discharge: null };
 
 export function CountdownDisplay() {
-  const [storedDates, setStoredDates] = useLocalStorage<StoredDates>(
-    "berryout-dates",
-    EMPTY_DATES,
-  );
+  const [storedDates, setStoredDates] = useLocalStorage<StoredDates>("berryout-dates", EMPTY_DATES);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -30,7 +27,7 @@ export function CountdownDisplay() {
     if (e && d) {
       const enlistment = startOfDay(new Date(e));
       const discharge = startOfDay(new Date(d));
-      if (!isNaN(enlistment.getTime()) && !isNaN(discharge.getTime())) {
+      if (!(Number.isNaN(enlistment.getTime()) || Number.isNaN(discharge.getTime()))) {
         setStoredDates({
           enlistment: enlistment.toISOString(),
           discharge: discharge.toISOString(),
@@ -41,20 +38,20 @@ export function CountdownDisplay() {
     }
   }, [setStoredDates]);
 
-  const enlistmentDate = storedDates.enlistment
-    ? parseISO(storedDates.enlistment)
-    : undefined;
-  const dischargeDate = storedDates.discharge
-    ? parseISO(storedDates.discharge)
-    : undefined;
+  const enlistmentDate = storedDates.enlistment ? parseISO(storedDates.enlistment) : undefined;
+  const dischargeDate = storedDates.discharge ? parseISO(storedDates.discharge) : undefined;
 
   const percentage = useMemo(() => {
-    if (!enlistmentDate || !dischargeDate) return 0;
+    if (!(enlistmentDate && dischargeDate)) {
+      return 0;
+    }
     return calculateProgress(enlistmentDate, dischargeDate);
   }, [enlistmentDate, dischargeDate]);
 
   const elapsedTime = useMemo(() => {
-    if (!enlistmentDate) return null;
+    if (!enlistmentDate) {
+      return null;
+    }
     return getElapsedTime(enlistmentDate);
   }, [enlistmentDate]);
 
@@ -80,16 +77,9 @@ export function CountdownDisplay() {
         onEnlistmentChange={handleEnlistmentChange}
         onDischargeChange={handleDischargeChange}
       />
-      <ProgressRing
-        percentage={percentage}
-        elapsedTime={elapsedTime}
-        size={288}
-      />
+      <ProgressRing percentage={percentage} elapsedTime={elapsedTime} size={288} />
       <DischargeCountdown dischargeDate={dischargeDate} />
-      <ActionButtons
-        enlistmentDate={enlistmentDate}
-        dischargeDate={dischargeDate}
-      />
+      <ActionButtons enlistmentDate={enlistmentDate} dischargeDate={dischargeDate} />
       <DischargeCounter discharged={percentage >= 100} />
     </div>
   );
